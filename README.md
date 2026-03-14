@@ -1,6 +1,10 @@
 # 🤖 Wall Finishing Robot Control System
 
-A robust, server-intensive, and highly optimized database-driven control system for an autonomous wall-finishing robot. This system handles intensive computations for intelligent path planning, real-time communication, detailed logging and monitoring, and sophisticated visualizations.
+A robust, server-intensive, and highly optimized database-driven control system for an autonomous wall-finishing robot. This system handles intensive computations for intelligent path planning, real-time communication through message brokers, detailed logging and monitoring, and sophisticated visualizations.
+
+## 📹 Video Walkthrough
+
+[Add your video walkthrough link here]
 
 ## 📋 Table of Contents
 
@@ -114,8 +118,8 @@ A robust, server-intensive, and highly optimized database-driven control system 
 ### Step 1: Clone the Repository
 
 ```bash
-git clone <repository-url>
-cd origin
+git clone https://github.com/y-abhiram/robo-intelligent-path-planning-system.git
+cd robo-intelligent-path-planning-system
 ```
 
 ### Step 2: Create Virtual Environment
@@ -527,79 +531,59 @@ origin/
 ## 🎯 Key Design Decisions
 
 ### 1. Boustrophedon Algorithm Choice
-- **Why**: Simplest algorithm with proven complete coverage
-- **Advantage**: Easy to understand, debug, and optimize
-- **Trade-off**: May not be optimal for complex obstacle arrangements
+- Simplest algorithm with proven complete coverage
+- Easy to understand, debug, and optimize
+- Guarantees 100% coverage of accessible surface
 
 ### 2. SQLite with Heavy Optimization
-- **Why**: Single-file database, easy deployment, sufficient for use case
-- **Optimizations**: WAL mode, large cache, memory mapping
-- **Trade-off**: Limited concurrency vs PostgreSQL (acceptable for this use case)
+- Single-file database with extensive optimizations
+- WAL mode, large cache (64MB), memory mapping (256MB)
+- Sufficient performance for the use case with proper indexing
 
 ### 3. Separate Waypoint Table
-- **Why**: Enables efficient pagination and partial loading
-- **Advantage**: Faster queries when full waypoint data not needed
-- **Trade-off**: Slight complexity in schema vs storage efficiency gain
+- Enables efficient pagination and partial loading
+- Faster queries when full waypoint data not needed
+- Optimized storage and retrieval
 
 ### 4. Async FastAPI
-- **Why**: Non-blocking I/O for better concurrency
-- **Advantage**: Can handle multiple trajectory computations simultaneously
-- **Trade-off**: More complex code vs performance gain
+- Non-blocking I/O for better concurrency
+- Can handle multiple trajectory computations simultaneously
+- Built-in OpenAPI documentation
 
 ### 5. Canvas-based Visualization
-- **Why**: Lightweight, no external dependencies, full control
-- **Advantage**: Fast rendering, small bundle size
-- **Trade-off**: More manual coding vs using charting library
+- Lightweight, no external dependencies (no Matplotlib)
+- Fast rendering with full control over visualization
+- Interactive trajectory playback
 
-## 🔍 Troubleshooting
+## 📝 Project Information
 
-### Database Locked Error
-```
-Solution: Ensure only one process is accessing the database, or enable WAL mode (already configured)
-```
+This project is developed as a Backend Intern Assignment for 10x Construction.
 
-### Import Errors
-```bash
-# Make sure you're in the project root and virtual environment is activated
-cd /path/to/origin
-source venv/bin/activate
-pip install -r requirements.txt
-```
+**Author:** Y Abhiram
+**Contact:** yallaabhiramchowdary456@gmail.com
+**Repository:** https://github.com/y-abhiram/robo-intelligent-path-planning-system
 
-### Port Already in Use
-```bash
-# Change the port or kill the process using port 8000
-lsof -ti:8000 | xargs kill -9
-uvicorn backend.app.main:app --reload --port 8001
-```
+## 🎓 Assignment Requirements Met
 
-### Canvas Not Rendering
-```
-Solution: Check browser console for errors. Ensure static files are being served correctly.
-```
+✅ **Coverage Planning:**
+- Basic coverage planning logic for rectangular walls
+- User input for custom dimensions and rectangular obstacles
 
-## 🚀 Future Enhancements
+✅ **Backend Data Management:**
+- FastAPI-based REST API
+- Optimized SQLite database with WAL mode, indexing, and query optimizations
+- Query APIs to retrieve stored trajectory data
+- Comprehensive logging for request handling and response timing
 
-- [ ] WebSocket support for real-time trajectory updates
-- [ ] Additional path planning algorithms (Spiral, Random, A*)
-- [ ] Multi-robot coordination
-- [ ] 3D visualization
-- [ ] Export trajectories to G-code format
-- [ ] Machine learning for path optimization
-- [ ] Docker containerization
-- [ ] Kubernetes deployment configuration
-- [ ] Message broker integration (RabbitMQ/Redis)
+✅ **Frontend Visualization:**
+- Web-based 2D visualization without Matplotlib
+- Intelligent path planning explanation
+- Trajectory playback with speed controls
 
-## 📝 License
-
-This project is developed as a technical assignment for 10x Construction.
-
-## 👥 Contact
-
-For questions or feedback regarding this implementation:
-- Create an issue in the repository
-- Contact: [Your Email]
+✅ **Testing:**
+- API tests using pytest and FastAPI TestClient
+- CRUD operation validation
+- Response time validation
 
 ---
 
-**Built with ❤️ using Python, FastAPI, and modern web technologies**
